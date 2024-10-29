@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/backward-codecs/backward-codecs.iml" filepath="$PROJECT_DIR$/backward-codecs/backward-codecs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/benchmark/benchmark.iml" filepath="$PROJECT_DIR$/benchmark/benchmark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/classification/classification.iml" filepath="$PROJECT_DIR$/classification/classification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codecs/codecs.iml" filepath="$PROJECT_DIR$/codecs/codecs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/common/src/common.iml" filepath="$PROJECT_DIR$/analysis/common/src/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/expressions/expressions.iml" filepath="$PROJECT_DIR$/expressions/expressions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/facet/facet.iml" filepath="$PROJECT_DIR$/facet/facet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/grouping/grouping.iml" filepath="$PROJECT_DIR$/grouping/grouping.iml" />
+      <module fileurl="file://$PROJECT_DIR$/highlighter/highlighter.iml" filepath="$PROJECT_DIR$/highlighter/highlighter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/icu/src/icu.iml" filepath="$PROJECT_DIR$/analysis/icu/src/icu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/join/join.iml" filepath="$PROJECT_DIR$/join/join.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/kuromoji/src/kuromoji.iml" filepath="$PROJECT_DIR$/analysis/kuromoji/src/kuromoji.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lucene-8.0.0-src.iml" filepath="$PROJECT_DIR$/.idea/lucene-8.0.0-src.iml" />
+      <module fileurl="file://$PROJECT_DIR$/memory/memory.iml" filepath="$PROJECT_DIR$/memory/memory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/misc/misc.iml" filepath="$PROJECT_DIR$/misc/misc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/morfologik/morfologik.iml" filepath="$PROJECT_DIR$/analysis/morfologik/morfologik.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/nori/src/nori.iml" filepath="$PROJECT_DIR$/analysis/nori/src/nori.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/opennlp/opennlp.iml" filepath="$PROJECT_DIR$/analysis/opennlp/opennlp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/phonetic/phonetic.iml" filepath="$PROJECT_DIR$/analysis/phonetic/phonetic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/queries/queries.iml" filepath="$PROJECT_DIR$/queries/queries.iml" />
+      <module fileurl="file://$PROJECT_DIR$/queryparser/queryparser.iml" filepath="$PROJECT_DIR$/queryparser/queryparser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/replicator/replicator.iml" filepath="$PROJECT_DIR$/replicator/replicator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sandbox/sandbox.iml" filepath="$PROJECT_DIR$/sandbox/sandbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/smartcn/smartcn.iml" filepath="$PROJECT_DIR$/analysis/smartcn/smartcn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spatial/spatial.iml" filepath="$PROJECT_DIR$/spatial/spatial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spatial-extras/spatial-extras.iml" filepath="$PROJECT_DIR$/spatial-extras/spatial-extras.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spatial3d/spatial3d.iml" filepath="$PROJECT_DIR$/spatial3d/spatial3d.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/stempel/stempel.iml" filepath="$PROJECT_DIR$/analysis/stempel/stempel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suggest/suggest.iml" filepath="$PROJECT_DIR$/suggest/suggest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-framework/test-framework.iml" filepath="$PROJECT_DIR$/test-framework/test-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/nori/src/tools/tools.iml" filepath="$PROJECT_DIR$/analysis/nori/src/tools/tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/common/src/tools/tools1.iml" filepath="$PROJECT_DIR$/analysis/common/src/tools/tools1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/kuromoji/src/tools/tools2.iml" filepath="$PROJECT_DIR$/analysis/kuromoji/src/tools/tools2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/analysis/icu/src/tools/tools3.iml" filepath="$PROJECT_DIR$/analysis/icu/src/tools/tools3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tools/tools4.iml" filepath="$PROJECT_DIR$/tools/tools4.iml" />
+    </modules>
+  </component>
+</project>
