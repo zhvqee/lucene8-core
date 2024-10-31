@@ -105,7 +105,13 @@ public class TermQuery extends Query {
 
     @Override
     public Scorer scorer(LeafReaderContext context) throws IOException {
+      // termStates 在构建weight 时候已经计算好了指定的term 的索引数据
       assert termStates == null || termStates.wasBuiltFor(ReaderUtil.getTopLevelContext(context)) : "The top-reader used to create Weight is not the same as the current reader's top-reader (" + ReaderUtil.getTopLevelContext(context);;
+
+      // 这里得到倒排索引数据, 这里重新查询了一遍
+      // 实际在 createWeight时，已经获取得到TermsEnum ,org.apache.lucene.index.TermStates.build
+
+      //SegmentTermsEnum 这类型
       final TermsEnum termsEnum = getTermsEnum(context);
       if (termsEnum == null) {
         return null;
@@ -196,6 +202,7 @@ public class TermQuery extends Query {
     final TermStates termState;
     if (perReaderTermState == null
         || perReaderTermState.wasBuiltFor(context) == false) {
+      // 获取 该字段到的所有分词数据
       termState = TermStates.build(context, term, scoreMode.needsScores());
     } else {
       // PRTS was pre-build for this IS

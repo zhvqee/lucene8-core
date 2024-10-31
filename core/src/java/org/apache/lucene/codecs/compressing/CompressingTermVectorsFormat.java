@@ -45,6 +45,7 @@ public class CompressingTermVectorsFormat extends TermVectorsFormat {
   /**
    * Create a new {@link CompressingTermVectorsFormat}.
    * <p>
+   *      formatName 用于 在校验文件头
    * <code>formatName</code> is the name of the format. This name will be used
    * in the file formats to perform
    * {@link CodecUtil#checkIndexHeader codec header checks}.
@@ -55,7 +56,7 @@ public class CompressingTermVectorsFormat extends TermVectorsFormat {
    * searching throughput. You should never instantiate two
    * {@link CompressingTermVectorsFormat}s that have the same name but
    * different {@link CompressionMode}s.
-   * <p>
+   * <p> chunkSize 越大，提高压缩率，但是索引时和加载文件可能有点慢
    * <code>chunkSize</code> is the minimum byte size of a chunk of documents.
    * Higher values of <code>chunkSize</code> should improve the compression
    * ratio but will require more memory at indexing time and might make document
@@ -66,7 +67,9 @@ public class CompressingTermVectorsFormat extends TermVectorsFormat {
    * @param segmentSuffix a suffix to append to files created by this format
    * @param compressionMode the {@link CompressionMode} to use
    * @param chunkSize the minimum number of bytes of a single chunk of stored documents
+   *                  存储文档单个分块的最小字节数
    * @param blockSize the number of chunks to store in an index block.
+   *                  索引快中可以有多少个chunk
    * @see CompressionMode
    */
   public CompressingTermVectorsFormat(String formatName, String segmentSuffix,
