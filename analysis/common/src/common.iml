@@ -8,15 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="misc" />
     <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="test-framework" />
-    <orderEntry type="module" module-name="backward-codecs" />
-    <orderEntry type="module" module-name="sandbox" />
-    <orderEntry type="module" module-name="sandbox" />
     <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="backward-codecs" />
-    <orderEntry type="module" module-name="misc" />
-    <orderEntry type="module" module-name="test-framework" />
   </component>
 </module>

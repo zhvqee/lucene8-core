@@ -10,11 +10,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="common" />
     <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="test-framework" />
     <orderEntry type="module" module-name="tools1" />
     <orderEntry type="module" module-name="tools1" />
     <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="test-framework" />
     <orderEntry type="module" module-name="common" />
   </component>
 </module>

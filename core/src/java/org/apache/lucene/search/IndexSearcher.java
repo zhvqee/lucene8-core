@@ -626,7 +626,7 @@ public class IndexSearcher {
    * @param leaves 
    *          the searchers leaves to execute the searches on
    * @param weight
-   *          to match documents
+   *          to match documents  weight 就是一个查询Query, 内部包括了query对象，并且为了使得query 的不可变性，提出了weight对象
    * @param collector
    *          to receive hits
    * @throws BooleanQuery.TooManyClauses If a query would exceed 
@@ -638,6 +638,9 @@ public class IndexSearcher {
     // TODO: should we make this
     // threaded...?  the Collector could be sync'd?
     // always use single thread:
+    /**
+     *  一个 LeafReaderContext 就是一个 LeafReader ,就是一个 Segment ,就是一个段
+     */
     for (LeafReaderContext ctx : leaves) { // search each subreader
       final LeafCollector leafCollector;
       try {

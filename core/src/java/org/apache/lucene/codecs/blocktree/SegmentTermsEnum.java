@@ -1010,6 +1010,7 @@ final class SegmentTermsEnum extends BaseTermsEnum {
     //if (DEBUG) {
     //System.out.println("  state=" + currentFrame.state);
     //}
+    //得到倒排索引数据
     return fr.parent.postingsReader.impacts(fr.fieldInfo, currentFrame.state, flags);
   }
 

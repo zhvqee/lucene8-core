@@ -55,6 +55,7 @@ import org.apache.lucene.util.packed.PackedInts;
  */
 public final class CompressingTermVectorsWriter extends TermVectorsWriter {
 
+  // 每个chunk最大文档数量
   // hard limit on the maximum number of documents per chunk
   static final int MAX_DOCUMENTS_PER_CHUNK = 128;
 
@@ -75,21 +76,34 @@ public final class CompressingTermVectorsWriter extends TermVectorsWriter {
   static final int FLAGS_BITS = PackedInts.bitsRequired(POSITIONS | OFFSETS | PAYLOADS);
 
   private final String segment;
+
+  // fields
   private CompressingStoredFieldsIndexWriter indexWriter;
+
+  //输出位置
   private IndexOutput vectorsStream;
 
   private final CompressionMode compressionMode;
+
+
   private final Compressor compressor;
+
   private final int chunkSize;
   
   private long numChunks; // number of compressed blocks written
+
   private long numDirtyChunks; // number of incomplete compressed blocks written
 
+  /**
+   * 文档描述
+   */
   /** a pending doc */
   private class DocData {
-    final int numFields;
-    final Deque<FieldData> fields;
-    final int posStart, offStart, payStart;
+    final int numFields; // 多少个文档字段
+    final Deque<FieldData> fields; //字段数据
+    final int posStart, //文档开始位置
+            offStart, //文档的结束位置
+            payStart; // 文档的
     DocData(int numFields, int posStart, int offStart, int payStart) {
       this.numFields = numFields;
       this.fields = new ArrayDeque<>(numFields);

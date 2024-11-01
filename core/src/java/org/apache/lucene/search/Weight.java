@@ -115,6 +115,7 @@ public abstract class Weight implements SegmentCacheable {
   }
 
   /**
+   *  返回一个Scorer 对象 ，可以循序迭代所有匹配的文档，并且赋予得分
    * Returns a {@link Scorer} which can iterate in order over all matching
    * documents and assign them a score.
    * <p>
@@ -162,6 +163,7 @@ public abstract class Weight implements SegmentCacheable {
    *
    */
   /**
+   *  返回一个 BulkScorer, 用于得分查询和把命中数据 放入 collector
    * Optional method, to return a {@link BulkScorer} to
    * score the query and send hits to a {@link Collector}.
    * Only queries that have a different top-level approach
@@ -178,6 +180,7 @@ public abstract class Weight implements SegmentCacheable {
    */
   public BulkScorer bulkScorer(LeafReaderContext context) throws IOException {
 
+    // 这是个抽象方法，具体每个Weight 查询，不一样
     Scorer scorer = scorer(context);
     if (scorer == null) {
       // No docs match

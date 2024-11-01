@@ -106,8 +106,10 @@ public final class TermStates {
     if (needsStats) {
       for (final LeafReaderContext ctx : context.leaves()) {
         //if (DEBUG) System.out.println("  r=" + leaves[i].reader);
+        // 这里就是获取得到指定的分词倒排数据
         TermsEnum termsEnum = loadTermsEnum(ctx, term);
         if (termsEnum != null) {
+          //指定的term的倒排索引
           final TermState termState = termsEnum.termState();
           //if (DEBUG) System.out.println("    found");
           perReaderTermState.register(termState, ctx.ord, termsEnum.docFreq(), termsEnum.totalTermFreq());
