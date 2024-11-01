@@ -164,6 +164,9 @@ public abstract class DocIdSetIterator {
    */
   public abstract int nextDoc() throws IOException;
 
+  /**
+   * 返回当前docId > = 目标Target
+   */
  /**
    * Advances to the first beyond the current whose document number is greater 
    * than or equal to <i>target</i>, and returns the document number itself. 

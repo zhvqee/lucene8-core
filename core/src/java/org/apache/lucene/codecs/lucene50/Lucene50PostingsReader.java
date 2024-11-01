@@ -265,6 +265,7 @@ public final class Lucene50PostingsReader extends PostingsReaderBase {
     final boolean indexHasOffsets;
     final boolean indexHasPayloads;
 
+    // 倒排索引，文档的总数量
     private int docFreq;                              // number of docs in this posting list
     private long totalTermFreq;                       // sum of freqs in this posting list (or docFreq when omitted)
     private int docUpto;                              // how many docs we've read
@@ -362,12 +363,16 @@ public final class Lucene50PostingsReader extends PostingsReaderBase {
     }
     
     private void refillDocs() throws IOException {
+      //剩余文档数量
       final int left = docFreq - docUpto;
       assert left > 0;
 
+      //剩余大于一个块大小，有多个块
       if (left >= BLOCK_SIZE) {
+        //读取一个数据到encoded，解码到 docDeltaBuffer
         forUtil.readBlock(docIn, encoded, docDeltaBuffer);
 
+        //是否需要频次,就解码频次，否则跳过部分数据
         if (indexHasFreq) {
           if (needsFreq) {
             forUtil.readBlock(docIn, encoded, freqBuffer);
@@ -387,18 +392,25 @@ public final class Lucene50PostingsReader extends PostingsReaderBase {
 
     @Override
     public int nextDoc() throws IOException {
+      //数量已经达到最大文档数，返回没有更多文档NO_MORE_DOCS
       if (docUpto == docFreq) {
         return doc = NO_MORE_DOCS;
       }
+
+      // 一个块，存储128个文档，如果 当前文档满了，就要加载下一个快
       if (docBufferUpto == BLOCK_SIZE) {
         refillDocs();
       }
 
+      //文档ID ,docDeltaBuffer 文档ID 之前的偏移量,节省存储空间
       accum += docDeltaBuffer[docBufferUpto];
       docUpto++;
 
+      //获取文档
       doc = accum;
-      freq = freqBuffer[docBufferUpto];
+
+      freq = freqBuffer[docBufferUpto]; //存储当前文档下term 的频次
+      //文档字节数组下标，即第docBufferUpto 个文档
       docBufferUpto++;
       return doc;
     }
@@ -409,6 +421,10 @@ public final class Lucene50PostingsReader extends PostingsReaderBase {
 
       // current skip docID < docIDs generated from current buffer <= next skip docID
       // we don't need to skip if target is buffered already
+
+      // 如果总文档数大于BLOCK_SIZE，说明有多个块，一个块存储128个文档，
+      //并且查询大于target 第一个文档，首先判断target 是否大于当前块的nextSkipDoc 最大文档ID,说明查找的docId 不在当前块中
+
       if (docFreq > BLOCK_SIZE && target > nextSkipDoc) {
 
         if (skipper == null) {
@@ -431,8 +447,11 @@ public final class Lucene50PostingsReader extends PostingsReaderBase {
 
         // always plus one to fix the result, since skip position in Lucene50SkipReader 
         // is a little different from MultiLevelSkipListReader
+
+        //这里skipper 就是skip 文档块，返回最新当前文档编号+1
         final int newDocUpto = skipper.skipTo(target) + 1; 
 
+        //一般为true,因为跳过了N个文档，目前读取来到第newDocUpto 个文档
         if (newDocUpto > docUpto) {
           // Skipper moved
           assert newDocUpto % BLOCK_SIZE == 0 : "got " + newDocUpto;
@@ -440,6 +459,7 @@ public final class Lucene50PostingsReader extends PostingsReaderBase {
 
           // Force to read next block
           docBufferUpto = BLOCK_SIZE;
+          //得到文档ID 的起始base,
           accum = skipper.getDoc();               // actually, this is just lastSkipEntry
           docIn.seek(skipper.getDocPointer());    // now point to the block we want to search
         }
@@ -447,23 +467,31 @@ public final class Lucene50PostingsReader extends PostingsReaderBase {
         // foresee whether skipper is necessary.
         nextSkipDoc = skipper.getNextSkipDoc();
       }
+
+      //文档已经达到末尾，直接返回NO_MORE_DOCS
       if (docUpto == docFreq) {
         return doc = NO_MORE_DOCS;
       }
+
+      //当前块已经扫描完成，直接重新加载下一个块
       if (docBufferUpto == BLOCK_SIZE) {
         refillDocs();
       }
 
       // Now scan... this is an inlined/pared down version
       // of nextDoc():
+
+      //这里上面已经可以对位到某个块了
       while (true) {
         accum += docDeltaBuffer[docBufferUpto];
         docUpto++;
 
+        //找到当前文档 已经大于目标target ,实现了advance 语义了，直接break,返回该文档
         if (accum >= target) {
           break;
         }
         docBufferUpto++;
+        //判断如果达到最大文档数，在返回NO_MORE_DOCS
         if (docUpto == docFreq) {
           return doc = NO_MORE_DOCS;
         }

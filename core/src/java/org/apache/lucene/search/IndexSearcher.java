@@ -563,6 +563,7 @@ public class IndexSearcher {
   */
   public <C extends Collector, T> T search(Query query, CollectorManager<C, T> collectorManager) throws IOException {
     if (executor == null) {
+      //TopScoreDocCollector 命中总数，收集器
       final C collector = collectorManager.newCollector();
       search(query, collector);
       return collectorManager.reduce(Collections.singletonList(collector));
@@ -640,6 +641,7 @@ public class IndexSearcher {
     for (LeafReaderContext ctx : leaves) { // search each subreader
       final LeafCollector leafCollector;
       try {
+        // 创建一个新的收集器 针对每个段，即分段查询分段收集
         leafCollector = collector.getLeafCollector(ctx);
       } catch (CollectionTerminatedException e) {
         // there is no doc of interest in this reader context
@@ -649,6 +651,7 @@ public class IndexSearcher {
       BulkScorer scorer = weight.bulkScorer(ctx);
       if (scorer != null) {
         try {
+          // 查询，得分 ，收集，有些在创建weight 时，就已经完成了查询
           scorer.score(leafCollector, ctx.reader().getLiveDocs());
         } catch (CollectionTerminatedException e) {
           // collection was terminated prematurely

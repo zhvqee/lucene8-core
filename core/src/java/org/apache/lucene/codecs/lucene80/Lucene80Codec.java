@@ -40,6 +40,10 @@ import org.apache.lucene.codecs.lucene60.Lucene60PointsFormat;
 import org.apache.lucene.codecs.lucene70.Lucene70SegmentInfoFormat;
 import org.apache.lucene.codecs.perfield.PerFieldDocValuesFormat;
 import org.apache.lucene.codecs.perfield.PerFieldPostingsFormat;
+/**
+ *  8.0 索引格式，每个字段的倒排和docValues （有序的基于document => field value的映射列表，
+ *  https://cloud.tencent.com/developer/article/1463890） 格式
+ */
 
 /**
  * Implements the Lucene 8.0 index format, with configurable per-field postings

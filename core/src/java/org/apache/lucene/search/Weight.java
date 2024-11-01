@@ -158,6 +158,10 @@ public abstract class Weight implements SegmentCacheable {
   }
 
   /**
+   *  用于 得分计算和 和存储数据到Collector
+   *
+   */
+  /**
    * Optional method, to return a {@link BulkScorer} to
    * score the query and send hits to a {@link Collector}.
    * Only queries that have a different top-level approach

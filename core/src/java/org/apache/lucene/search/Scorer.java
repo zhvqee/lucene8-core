@@ -71,7 +71,12 @@ public abstract class Scorer extends Scorable {
    */
   public abstract DocIdSetIterator iterator();
 
+
   /**
+   *  返回null，说明不支持2阶段迭代
+   *
+   *
+   *
    * Optional method: Return a {@link TwoPhaseIterator} view of this
    * {@link Scorer}. A return value of {@code null} indicates that
    * two-phase iteration is not supported.
@@ -90,7 +95,7 @@ public abstract class Scorer extends Scorable {
     return null;
   }
 
-  /**
+  /** 返回这个块中最大的文档ID+1
    * Advance to the block of documents that contains {@code target} in order to
    * get scoring information about this block. This method is implicitly called
    * by {@link DocIdSetIterator#advance(int)} and

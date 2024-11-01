@@ -22,6 +22,10 @@ import java.io.IOException;
 import org.apache.lucene.search.DocIdSetIterator;
 import org.apache.lucene.util.BytesRef;
 
+/**
+ * 倒排索引 迭代， 每次使用前，先nextDoc 获取下一个docId
+ */
+
 /** Iterates through the postings.
  *  NOTE: you must first call {@link #nextDoc} before using
  *  any of the per-doc methods. */
@@ -68,6 +72,9 @@ public abstract class PostingsEnum extends DocIdSetIterator {
   }
 
   /**
+   * 返回 这个分词term 在该篇文档上的出现频次
+   */
+  /**
    * Returns term frequency in the current document, or 1 if the field was
    * indexed with {@link IndexOptions#DOCS}. Do not call this before
    * {@link #nextDoc} is first called, nor after {@link #nextDoc} returns
@@ -80,15 +87,25 @@ public abstract class PostingsEnum extends DocIdSetIterator {
   public abstract int freq() throws IOException;
 
   /**
+   * 位置信息
+   */
+  /**
    * Returns the next position, or -1 if positions were not indexed.
    * Calling this more than {@link #freq()} times is undefined.
    */
   public abstract int nextPosition() throws IOException;
 
+
+  /**
+   * 开始偏移量
+   */
   /** Returns start offset for the current position, or -1
    *  if offsets were not indexed. */
   public abstract int startOffset() throws IOException;
 
+  /**
+   * 结束偏移量
+   */
   /** Returns end offset for the current position, or -1 if
    *  offsets were not indexed. */
   public abstract int endOffset() throws IOException;
