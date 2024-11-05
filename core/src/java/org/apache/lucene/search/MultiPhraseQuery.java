@@ -43,7 +43,13 @@ import org.apache.lucene.util.ArrayUtil;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.PriorityQueue;
 
+
+
+
 /**
+ *
+ * PhraseQuery 的扩展，允许在某个特定的位置使用多个terms
+ *
  * A generalized version of {@link PhraseQuery}, with the possibility of
  * adding more than one term at the same position that are treated as a disjunction (OR).
  * To use this class to search for the phrase "Microsoft app*" first create a Builder and use

@@ -52,15 +52,20 @@ import org.apache.lucene.util.MathUtil;
  */
 
 public abstract class MultiLevelSkipListWriter {
+
+  //当前跳表的层数
   /** number of levels in this skip list */
   protected final int numberOfSkipLevels;
-  
+
+  //跳表间隔，0层跳表间隔
   /** the skip interval in the list with level = 0 */
   private final int skipInterval;
 
+  //非0层间隔
   /** skipInterval used for level &gt; 0 */
   private final int skipMultiplier;
-  
+
+  //内存跳表
   /** for every skip level a different buffer is used  */
   private RAMOutputStream[] skipBuffer;
 
@@ -81,6 +86,7 @@ public abstract class MultiLevelSkipListWriter {
     if (numberOfSkipLevels > maxSkipLevels) {
       numberOfSkipLevels = maxSkipLevels;
     }
+    // 计算等到跳表的层数
     this.numberOfSkipLevels = numberOfSkipLevels;
   }
   
@@ -91,6 +97,7 @@ public abstract class MultiLevelSkipListWriter {
     this(skipInterval, skipInterval, maxSkipLevels, df);
   }
 
+  //分配每一层的内存
   /** Allocates internal skip buffers. */
   protected void init() {
     skipBuffer = new RAMOutputStream[numberOfSkipLevels];
@@ -105,7 +112,7 @@ public abstract class MultiLevelSkipListWriter {
       init();
     } else {
       for (int i = 0; i < skipBuffer.length; i++) {
-        skipBuffer[i].reset();
+        skipBuffer[i].reset(); // reset 输出流
       }
     }      
   }
@@ -118,6 +125,7 @@ public abstract class MultiLevelSkipListWriter {
    */
   protected abstract void writeSkipData(int level, IndexOutput skipBuffer) throws IOException;
 
+  // 这里输入的是df 是词频文档频次，即某个分词下有df 个文档数量
   /**
    * Writes the current skip data to the buffers. The current document frequency determines
    * the max level is skip data is to be written to. 
@@ -129,23 +137,27 @@ public abstract class MultiLevelSkipListWriter {
 
     assert df % skipInterval == 0;
     int numLevels = 1;
-    df /= skipInterval;
+    df /= skipInterval; // 首先得到第0层有df 个文档，因为第0层间隔skipInterval 选一个文档
    
     // determine max level
+    //计算跳表层数
     while ((df % skipMultiplier) == 0 && numLevels < numberOfSkipLevels) {
       numLevels++;
       df /= skipMultiplier;
     }
     
     long childPointer = 0;
-    
+
+    //从开始第0层开始写到最高层，数据
     for (int level = 0; level < numLevels; level++) {
+      //第level写数据，构建第Level 层
       writeSkipData(level, skipBuffer[level]);
       
       long newChildPointer = skipBuffer[level].getFilePointer();
       
       if (level != 0) {
         // store child pointers for all levels except the lowest
+        // 如果不是第一层，需要记录每一层下一次写入的childPointer
         skipBuffer[level].writeVLong(childPointer);
       }
       
@@ -154,6 +166,10 @@ public abstract class MultiLevelSkipListWriter {
     }
   }
 
+  /**
+   * 持久化 跳表到指定的output,返回跳表的文件开始位置
+   *
+   */
   /**
    * Writes the buffered skip lists to the given output.
    * 
@@ -164,14 +180,17 @@ public abstract class MultiLevelSkipListWriter {
     long skipPointer = output.getFilePointer();
     //System.out.println("skipper.writeSkip fp=" + skipPointer);
     if (skipBuffer == null || skipBuffer.length == 0) return skipPointer;
-    
+
+    //从最高层开始写，
     for (int level = numberOfSkipLevels - 1; level > 0; level--) {
+      //length 是 第level-1层的文件的结尾
       long length = skipBuffer[level].getFilePointer();
       if (length > 0) {
         output.writeVLong(length);
         skipBuffer[level].writeTo(output);
       }
     }
+    //第0层写
     skipBuffer[0].writeTo(output);
     
     return skipPointer;

@@ -40,6 +40,15 @@ import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.util.ArrayUtil;
 import org.apache.lucene.util.BytesRef;
 
+/** 短语查询
+ *  匹配的文档包含特定序列的terms, 首先对输入进行分词，
+ *  备注：
+ *    1、所有的term 都必须匹配，
+ *    2、terms 之间的相对位置slop 必须要一致
+ *    3、如果设置相对位置，后一个term 添加的postion 比前一个位置要靠后，
+ *    4、field 必须是相同的字段
+ */
+
 /** A Query that matches documents containing a particular sequence of terms.
  * A PhraseQuery is built by QueryParser for input like <code>"new york"</code>.
  * 
@@ -198,6 +207,7 @@ public class PhraseQuery extends Query {
   }
 
   /**
+   * slop: 最大编辑距离
    * Create a phrase query which will match documents that contain the given
    * list of terms at consecutive positions in {@code field}, and at a
    * maximum edit distance of {@code slop}. For more complicated use-cases,

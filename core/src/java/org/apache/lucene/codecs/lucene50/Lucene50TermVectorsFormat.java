@@ -26,6 +26,7 @@ import org.apache.lucene.store.DataOutput;
 import org.apache.lucene.util.packed.BlockPackedWriter;
 import org.apache.lucene.util.packed.PackedInts;
 
+//https://zhuanlan.zhihu.com/p/488598463
 /**
  * Lucene 5.0 {@link TermVectorsFormat term vectors format}.
  * <p>
