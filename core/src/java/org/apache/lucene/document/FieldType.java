@@ -26,6 +26,7 @@ import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexableFieldType;
 import org.apache.lucene.index.PointValues;
 
+//描述一个一个字段的相关属性
 /**
  * Describes the properties of a field.
  */

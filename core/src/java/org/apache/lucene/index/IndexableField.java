@@ -29,7 +29,7 @@ import org.apache.lucene.util.BytesRef;
  *  consumes Iterable&lt;IndexableField&gt; as a document.
  *
  *  @lucene.experimental */
-
+// 代表字段可索引
 public interface IndexableField {
 
   /** Field name */

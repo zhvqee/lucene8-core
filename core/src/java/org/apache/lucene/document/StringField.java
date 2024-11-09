@@ -20,6 +20,7 @@ package org.apache.lucene.document;
 import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.util.BytesRef;
 
+//不分词 文本， keyword
 /** A field that is indexed but not tokenized: the entire
  *  String value is indexed as a single token.  For example
  *  this might be used for a 'country' field or an 'id'

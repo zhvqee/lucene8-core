@@ -27,6 +27,7 @@ import org.apache.lucene.search.IndexOrDocValuesQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.BytesRef;
 
+// 可排序的字段类型，最大32766 bytes (差不多32M), 但是不存储，若需求存储，需要另一个字段StoredField
 /**
  * <p>
  * Field that stores

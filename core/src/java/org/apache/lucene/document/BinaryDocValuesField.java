@@ -19,7 +19,7 @@ package org.apache.lucene.document;
 import org.apache.lucene.index.BinaryDocValues;
 import org.apache.lucene.index.DocValuesType;
 import org.apache.lucene.util.BytesRef;
-
+// 存储字节数据
 /**
  * Field that stores a per-document {@link BytesRef} value.  
  * <p>

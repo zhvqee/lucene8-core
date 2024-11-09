@@ -27,6 +27,7 @@ import org.apache.lucene.search.IndexOrDocValuesQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.BytesRef;
 
+//每个文档的字段，存储bytesRef，可以一组
 /**
  * <p>
  * Field that stores

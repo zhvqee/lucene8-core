@@ -34,7 +34,7 @@ import org.apache.lucene.util.Sorter;
 
 
 
-
+// 状态机
 // TODO
 //   - could use packed int arrays instead
 //   - could encode dest w/ delta from to?
@@ -59,6 +59,8 @@ public class Automaton implements Accountable {
    *  each added state because we pack a pointer to the transitions
    *  array and a count of how many transitions leave the state.  */
   private int nextState;
+
+
 
   /** Where we next write to in int[] transitions; this
    *  increments by 3 for each added transition because we
@@ -125,7 +127,7 @@ public class Automaton implements Accountable {
     int numStates = getNumStates();
     Transition[][] transitions = new Transition[numStates][];
     for(int s=0;s<numStates;s++) {
-      int numTransitions = getNumTransitions(s);
+      int numTransitions = getNumTransitions(s); //获取每个状态可以有多少出度，转出
       transitions[s] = new Transition[numTransitions];
       for(int t=0;t<numTransitions;t++) {
         Transition transition = new Transition();
@@ -161,23 +163,23 @@ public class Automaton implements Accountable {
     FutureObjects.checkIndex(dest, bounds);
 
     growTransitions();
-    if (curState != source) {
-      if (curState != -1) {
+    if (curState != source) { //当前状态所处的状态不是source
+      if (curState != -1) {//若当前状态有转出状态
         finishCurrentState();
       }
 
       // Move to next source:
-      curState = source;
+      curState = source; //转向指定状态
       if (states[2*curState] != -1) {
         throw new IllegalStateException("from state (" + source + ") already had transitions added");
       }
       assert states[2*curState+1] == 0;
-      states[2*curState] = nextTransition;
+      states[2*curState] = nextTransition; //保存当前状态的出度位置
     }
 
-    transitions[nextTransition++] = dest;
-    transitions[nextTransition++] = min;
-    transitions[nextTransition++] = max;
+    transitions[nextTransition++] = dest; //指定目的
+    transitions[nextTransition++] = min; //知道最小
+    transitions[nextTransition++] = max; //指定最大的
 
     // Increment transition count for this state
     states[2*curState+1]++;
@@ -349,6 +351,7 @@ public class Automaton implements Accountable {
   }
 
   private void growStates() {
+    // states 数组（每个状态占2个位置），不足，扩容
     if (nextState+2 > states.length) {
       states = ArrayUtil.grow(states, nextState+2);
     }
@@ -527,6 +530,7 @@ public class Automaton implements Accountable {
     return false;
   }
 
+  //获取状态的转换数据，index 为状态state 第index 个转换
   /** Fill the provided {@link Transition} with the index'th
    *  transition leaving the specified state. */
   public void getTransition(int state, int index, Transition t) {

@@ -26,7 +26,7 @@ import org.apache.lucene.index.LeafReader;
 import org.apache.lucene.index.SortedNumericDocValues;
 import org.apache.lucene.search.IndexOrDocValuesQuery;
 import org.apache.lucene.search.Query;
-
+// 一组 long 类型数据
 /**
  * <p>
  * Field that stores a per-document <code>long</code> values for scoring, 

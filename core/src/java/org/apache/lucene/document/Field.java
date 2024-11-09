@@ -30,6 +30,7 @@ import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.IndexableFieldType;
 import org.apache.lucene.util.BytesRef;
 
+//文档的字段，一般情况下通过该类的子类 去使用
 /**
  * Expert: directly create a field for a document.  Most
  * users should use one of the sugar subclasses: 

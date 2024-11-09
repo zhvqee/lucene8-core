@@ -29,6 +29,7 @@ import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.NumericUtils;
 
+// long 类型N维度点 类型
 /** 
  * An indexed {@code long} field for fast range filters.  If you also
  * need to store the value, you should add a separate {@link StoredField} instance.

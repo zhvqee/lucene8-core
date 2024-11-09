@@ -22,6 +22,7 @@ import java.io.Reader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.index.IndexOptions;
 
+//会被分词的
 /** A field that is indexed and tokenized, without term
  *  vectors.  For example this would be used on a 'body'
  *  field, that contains the bulk of a document's text. */
@@ -37,7 +38,7 @@ public final class TextField extends Field {
   static {
     TYPE_NOT_STORED.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
     TYPE_NOT_STORED.setTokenized(true);
-    TYPE_NOT_STORED.freeze();
+    TYPE_NOT_STORED.freeze(); //一旦写入禁止修改
 
     TYPE_STORED.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
     TYPE_STORED.setTokenized(true);

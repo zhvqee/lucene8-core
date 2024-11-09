@@ -19,7 +19,7 @@ package org.apache.lucene.document;
 import org.apache.lucene.index.IndexReader; // javadocs
 import org.apache.lucene.search.IndexSearcher; // javadocs
 import org.apache.lucene.util.BytesRef;
-
+//用于 存储，主要是倒排索引检索后，获取文档携带出来的信息
 /** A field whose value is stored so that {@link
  *  IndexSearcher#doc} and {@link IndexReader#document IndexReader.document()} will
  *  return the field and its value. */

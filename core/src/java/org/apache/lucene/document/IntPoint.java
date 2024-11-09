@@ -25,7 +25,7 @@ import org.apache.lucene.search.PointRangeQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.NumericUtils;
-
+// 一组 整型的有N 维度的int 点
 /** 
  * An indexed {@code int} field for fast range filters.  If you also
  * need to store the value, you should add a separate {@link StoredField} instance.

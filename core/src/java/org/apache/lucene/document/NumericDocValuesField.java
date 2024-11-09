@@ -27,6 +27,7 @@ import org.apache.lucene.index.SortedNumericDocValues;
 import org.apache.lucene.search.IndexOrDocValuesQuery;
 import org.apache.lucene.search.Query;
 
+// 存储一个long value 用于排序
 /**
  * <p>
  * Field that stores a per-document <code>long</code> value for scoring, 
